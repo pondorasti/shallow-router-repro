@@ -115,14 +115,9 @@ export const useSyncedState = <T extends string | string[] = string>(
   toString: (val: T) => string = String
 ): [T, (value: T | ((val: T) => T)) => void] => {
   const router = useRouter()
-  const localStorageKey = `${key}`
 
   const storedValue = (() => {
-    const queryValue = router.query[key]
-    // const localStorageValue = localStorage.getItem(localStorageKey)
-
-    // const cachedValue = queryValue ?? localStorageValue
-    const cachedValue = queryValue
+    const cachedValue = router.query[key]
     let currentValue: T
     if (cachedValue && parse) currentValue = parse(cachedValue)
     if (cachedValue) currentValue = cachedValue as T
@@ -141,8 +136,7 @@ export const useSyncedState = <T extends string | string[] = string>(
       url.searchParams.set(key, toString(valueToStore))
     }
 
-    localStorage.setItem(localStorageKey, toString(valueToStore))
-    router.push(url, undefined, { shallow: true, scroll: false })
+    router.push(url, undefined, { shallow: false, scroll: false })
   }
 
   return [storedValue, setValue]
