@@ -20,14 +20,7 @@ const Boogeyman = () => {
         <legend>Devilish Radio Buttons</legend>
 
         <div>
-          <input
-            type="radio"
-            id="huey"
-            name="drone"
-            value="huey"
-            checked={drone === "huey"}
-            onChange={handleChange}
-          />
+          <input type="radio" id="huey" name="drone" value="huey" checked={drone === "huey"} onChange={handleChange} />
           <label htmlFor="huey">Huey</label>
         </div>
 
@@ -67,10 +60,7 @@ const MemoizedPrincess = memo(() => {
   return (
     <div>
       <h1>Memoized Princess {id}</h1>
-      <p>
-        I&apos;m a cozy memoized component. I should not be re-rendered when the radio buttons are
-        clicked.
-      </p>
+      <p>I&apos;m a cozy memoized component. I should not be re-rendered when the radio buttons are clicked.</p>
     </div>
   )
 })
@@ -136,7 +126,7 @@ export const useSyncedState = <T extends string | string[] = string>(
       url.searchParams.set(key, toString(valueToStore))
     }
 
-    router.push(url, undefined, { shallow: false, scroll: false })
+    router.push(url, undefined, { shallow: true, scroll: false })
   }
 
   return [storedValue, setValue]
